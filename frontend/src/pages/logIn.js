@@ -19,3 +19,21 @@ const Login = () => {
       setMessage('Internal server error');
     }
   };
+
+  return (
+    <div className="login-container">
+      <h1>Sign in</h1>
+      <form onSubmit={handleLogin}>
+        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Your username" required />
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" required />
+        <input type="submit" value="Next" />
+      </form>
+      <div className="footer">
+        Don't have an account? <a href="signup.html">Create account</a>
+      </div>
+      {message && <p>{message}</p>}
+    </div>
+  );
+};
+
+export default Login;
