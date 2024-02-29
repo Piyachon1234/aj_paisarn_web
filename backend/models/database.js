@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
 
 const app = express();
 const port = 3000;
@@ -15,32 +16,57 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 const userSchema = new mongoose.Schema({
   username: String,
   password: String,
+  name: String,
+  email: String,
 });
 const videoSchema = new mongoose.Schema({
     path: String,
     timestamp: Date,
     metadata: Object,
   });
-  
+
 // Create a model based on the schema
 const User = mongoose.model('User', userSchema);
+const Video = mongoose.model('Video', videoSchema);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.post('/register', async (req, res) => {
+  const { username, password, name, email } = req.body;
 
-// Route to handle user login
-app.post('/login', (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({ username, password: hashedPassword, name, email });
+
+    const savedUser = await newUser.save();
+    res.status(201).json(savedUser);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to save user to database' });
+  }
+});
+app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
-  // Find the user in the database
-  User.findOne({ username, password }, (err, user) => {
-    if (err) {
-      res.status(500).json({ message: 'Internal server error' });
-    } else if (!user) {
-      res.status(401).json({ message: 'Invalid username or password' });
-    } else {
-      res.status(200).json({ message: 'Login successful' });
+  try {
+    // Find the user in the database
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(401).send('Invalid username or password');
     }
-  });
+
+    // Compare the hashed password
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).send('Invalid username or password');
+    }
+
+    res.status(200).send('Login successful');
+  } catch (error) {
+    res.status(500).send('Internal server error');
+  }
 });
 // Route to retrieve a video by ID
 app.get('/videos/:id', (req, res) => {
@@ -78,4 +104,4 @@ app.post('/videos', (req, res) => {
       }
     });
   });
-  
+ 
