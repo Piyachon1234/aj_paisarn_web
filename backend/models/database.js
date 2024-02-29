@@ -25,6 +25,13 @@ const videoSchema = new mongoose.Schema({
     metadata: Object,
   });
 
+const imageSchema = new mongoose.Schema({
+  image_id: String,
+  category_id: String,
+  bbox: String,
+  score: Int16Array,
+});
+
 // Create a model based on the schema
 const User = mongoose.model('User', userSchema);
 const Video = mongoose.model('Video', videoSchema);
