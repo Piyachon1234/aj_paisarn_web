@@ -30,9 +30,10 @@ const imageSchema = new mongoose.Schema({
 
 // Define a schema for the video collection
 const videoSchema = new mongoose.Schema({
-  path: String,
+  title: String,
   timestamp: Date,
   metadata: Object,
+  stream: Buffer, // Store the video stream as binary data
 });
 
 // Create models based on the schemas
@@ -95,8 +96,9 @@ app.get('/videos/:id', (req, res) => {
     } else if (!video) {
       res.status(404).json({ message: 'Video not found' });
     } else {
-      // Serve the video file or URL
-      res.status(200).json(video);
+      // Serve the video stream
+      res.setHeader('Content-Type', 'video/mp4');
+      res.send(video.stream);
     }
   });
 });
@@ -114,6 +116,23 @@ app.post('/images', (req, res) => {
       res.status(500).json({ message: 'Failed to save image to database' });
     } else {
       res.status(201).json(savedImage);
+    }
+  });
+});
+
+// Route to store live stream video data
+app.post('/videos', (req, res) => {
+  const { title, timestamp, metadata, stream } = req.body;
+
+  // Create a new video document with the stream
+  const newVideo = new Video({ title, timestamp, metadata, stream });
+
+  // Save the video document to the database
+  newVideo.save((err, savedVideo) => {
+    if (err) {
+      res.status(500).json({ message: 'Failed to save video to database' });
+    } else {
+      res.status(201).json(savedVideo);
     }
   });
 });
