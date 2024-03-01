@@ -19,25 +19,31 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: String,
 });
-const videoSchema = new mongoose.Schema({
-    path: String,
-    timestamp: Date,
-    metadata: Object,
-  });
 
+// Define a schema for the image collection
 const imageSchema = new mongoose.Schema({
-  image_id: String,
-  category_id: String,
-  bbox: String,
-  score: Int16Array,
+  image_id: Number,
+  category_id: Number,
+  bbox: [Number],
+  score: Number,
 });
 
-// Create a model based on the schema
+// Define a schema for the video collection
+const videoSchema = new mongoose.Schema({
+  path: String,
+  timestamp: Date,
+  metadata: Object,
+});
+
+// Create models based on the schemas
 const User = mongoose.model('User', userSchema);
+const Image = mongoose.model('Image', imageSchema);
 const Video = mongoose.model('Video', videoSchema);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// Route to handle user registration
 app.post('/register', async (req, res) => {
   const { username, password, name, email } = req.body;
 
@@ -52,6 +58,8 @@ app.post('/register', async (req, res) => {
     res.status(500).json({ message: 'Failed to save user to database' });
   }
 });
+
+// Route to handle user login
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
@@ -75,40 +83,42 @@ app.post('/login', async (req, res) => {
     res.status(500).send('Internal server error');
   }
 });
+
 // Route to retrieve a video by ID
 app.get('/videos/:id', (req, res) => {
-    const { id } = req.params;
-  
-    // Find the video in the database by ID
-    Video.findById(id, (err, video) => {
-      if (err) {
-        res.status(500).json({ message: 'Failed to retrieve video from database' });
-      } else if (!video) {
-        res.status(404).json({ message: 'Video not found' });
-      } else {
-        // Serve the video file or URL
-        res.status(200).json(video);
-      }
-    });
+  const { id } = req.params;
+
+  // Find the video in the database by ID
+  Video.findById(id, (err, video) => {
+    if (err) {
+      res.status(500).json({ message: 'Failed to retrieve video from database' });
+    } else if (!video) {
+      res.status(404).json({ message: 'Video not found' });
+    } else {
+      // Serve the video file or URL
+      res.status(200).json(video);
+    }
   });
-  
+});
+
+// Route to store image data
+app.post('/images', (req, res) => {
+  const imageData = req.body;
+
+  // Create a new image document
+  const newImage = new Image(imageData);
+
+  // Save the image document to the database
+  newImage.save((err, savedImage) => {
+    if (err) {
+      res.status(500).json({ message: 'Failed to save image to database' });
+    } else {
+      res.status(201).json(savedImage);
+    }
+  });
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-app.post('/videos', (req, res) => {
-    const { path, timestamp, metadata } = req.body;
-  
-    // Create a new video document
-    const newVideo = new Video({ path, timestamp, metadata });
-  
-    // Save the video document to the database
-    newVideo.save((err, savedVideo) => {
-      if (err) {
-        res.status(500).json({ message: 'Failed to save video to database' });
-      } else {
-        res.status(201).json(savedVideo);
-      }
-    });
-  });
- 
