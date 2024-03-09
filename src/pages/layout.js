@@ -12,7 +12,7 @@ const Layout = () => {
             <Link to="/login">Login</Link>
           </li>
           <li>
-            <Link to="/keyframe">Keyfrmae</Link>
+            <Link to="/keyframe">Keyframe</Link>
           </li>
         </ul>
       </nav>
