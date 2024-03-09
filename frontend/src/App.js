@@ -1,21 +1,19 @@
-import './App.css'
-import Router from './components/Router'
-import Context from './components/Context'
+// App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Register from './components/Register';
+import Login from './components/Login';
+import Images from './components/Images';
 
 function App() {
-  const userInfo = {
-    name: "Piyachon",
-    email: "piyachon.rusu@gamil.com",
-    loggedIn: true,
-    cartItems: 4
-  }
-
   return (
-    <>
-      <Context.Provider value={userInfo}>
-        <Router />
-      </Context.Provider>
-    </>
+    <Router>
+      <Switch>
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
+        <Route path="/images" component={Images} />
+      </Switch>
+    </Router>
   );
 }
 
