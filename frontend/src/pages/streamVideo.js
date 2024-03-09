@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const VideoPlayer = () => {
   const [videoUrl, setVideoUrl] = useState('');
+  const [recentImages, setRecentImages] = useState([]);
 
   useEffect(() => {
     // Fetch the video URL from the server
@@ -19,25 +20,53 @@ const VideoPlayer = () => {
       }
     };
 
-    fetchVideoUrl();
+    // Fetch recent images from the server
+    const fetchRecentImages = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/images/recent'); // Change the endpoint as needed
+        setRecentImages(response.data);
+      } catch (error) {
+        console.error('Failed to fetch recent images:', error.message);
+      }
+    };
 
-    // Set up a timer to periodically fetch the latest video URL
-    const interval = setInterval(fetchVideoUrl, 5000); // Fetch every 5 seconds, adjust as needed
+    fetchVideoUrl();
+    fetchRecentImages();
+
+    // Set up a timer to periodically fetch the latest video URL and recent images
+    const interval = setInterval(() => {
+      fetchVideoUrl();
+      fetchRecentImages();
+    }, 5000); // Fetch every 5 seconds, adjust as needed
 
     return () => clearInterval(interval); // Clean up the interval on component unmount
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <h1>Live Stream</h1>
-      {videoUrl ? (
-        <video controls autoPlay>
-          <source src={videoUrl} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      ) : (
-        <p>Loading...</p>
-      )}
+      <div className="row">
+        <div className="col-md-8">
+          {videoUrl ? (
+            <video controls autoPlay className="w-100">
+              <source src={videoUrl} type="application/x-mpegURL" />
+              Your browser does not support the video tag or the HLS format.
+            </video>
+          ) : (
+            <p>Loading...</p>
+          )}
+        </div>
+        <div className="col-md-4">
+          <h2>Recent Images</h2>
+          <div className="row">
+            {recentImages.map((image, index) => (
+              <div key={index} className="col-md-6 mb-2">
+                <img src={`data:image/jpeg;base64,${image.stream}`} alt={`Image ${index}`} className="img-fluid" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
