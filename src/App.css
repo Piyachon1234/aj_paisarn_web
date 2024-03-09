@@ -39,8 +39,20 @@
 
 .text {
   font-family: "AnuphanRegular";
+  font-size: 20px;
+}
+
+.col-topic {
+  font-family: "AnuphanSemiBold";
+  font-size: 30px;
 }
 
 .topic {
   font-family: "AnuphanSemiBold";
+  font-size: 50px;
+}
+
+.cctv_name {
+  font-family: "AnuphanSemiBold";
+  font-size: 25px;
 }
