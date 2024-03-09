@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.anuphan-rugular {
+  font-family: "AnuphanRegular";
+}
+
+.anuphan-semibold {
+  font-family: "AnuphanSemiBold";
+}

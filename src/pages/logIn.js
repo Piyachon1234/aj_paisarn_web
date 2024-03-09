@@ -22,7 +22,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h1>Sign in</h1>
+      <h1 className="anuphan-400">Sign in</h1>
       <form onSubmit={handleLogin}>
         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Your username" required />
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" required />

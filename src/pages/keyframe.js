@@ -1,7 +1,7 @@
 const Keyframe = () => {
   return (
     <div>
-      <h1>Keyframe</h1>
+      <h1 className="anuphan-semibold" >Keyframe</h1>
     </div>
   );
 } 

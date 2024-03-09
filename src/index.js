@@ -4,6 +4,7 @@ import Layout from "./pages/layout";
 import Keyframe from "./pages/keyframe";
 import Login from "./pages/logIn";
 import Home from "./pages/home"
+import './index.css'
 
 export default function App() {
   return (

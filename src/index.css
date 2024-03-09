@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: "AnuphanRegular";
+  src: local("AnuphanRegular"),
+   url("./fonts/Anuphan-Regular.ttf") format("truetype");
+  font-weight: 400;
+ }
+
+ @font-face {
+  font-family: "AnuphanSemiBold";
+  src: local("AnuphanSemiBold"),
+   url("./fonts/Anuphan-SemiBold.ttf") format("truetype");
+  font-weight: 400;
+ }
