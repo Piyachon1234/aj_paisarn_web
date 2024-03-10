@@ -39,7 +39,7 @@ const Home = () => {
                     name={cctv.name} 
                     cctv_url={cctv.cctv_url} 
                     location={cctv.location}
-                    sluf={cctv.slug} />
+                    slug={cctv.slug} />
                 })}
         </Container>
     );

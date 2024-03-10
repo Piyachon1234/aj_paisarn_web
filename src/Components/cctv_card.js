@@ -1,12 +1,13 @@
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 import ReactPlayer from 'react-player';
+import { Link } from "react-router-dom";
 
-const CctvCard = ({name, cctv_url, location}) => {
+const CctvCard = ({name, cctv_url, location, slug}) => {
     return (
         <Card className='my-3'>
             <Card.Body>
-                <Card.Title>{name}</Card.Title>
+                <Card.Title><Link to={`/cctv/${slug}`} style={{ color: 'black',textDecoration: 'none' }}>{name}</Link></Card.Title>
                 <Row>
                     <Col><ReactPlayer url={cctv_url}
                         width='100%'
