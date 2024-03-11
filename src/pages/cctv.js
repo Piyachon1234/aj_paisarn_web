@@ -1,33 +1,22 @@
-import React from "react";
+import React, { useEffect,useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ReactPlayer from 'react-player';
 import { Container, Row, Col } from "react-bootstrap";
-
-const listOfCctv = [
-    {
-        name: 'C17',
-        cctv_url: 'https://rtmp.smartway.co.th/hls/smarteye595.m3u8',
-        location: 'สนามฟุตซอลมุมขวา',
-        slug: 'c17-futsal-court-right'
-    },
-    {
-        name: 'C15',
-        cctv_url: 'https://rtmp.smartway.co.th/hls/smarteye566.m3u8',
-        location: 'สนามฟุตซอลมุมซ้าย',
-        slug: 'c17-futsal-court-left'
-    },
-    {
-        name: 'C6',
-        cctv_url: 'https://rtmp.smartway.co.th/hls/smarteye591.m3u8',
-        location: 'สนามฟุตบอลฝั่งอาคาร 1',
-        slug: 'c17-futsal-court-building-1'
-    },
-]
+import { listOfCctv } from "../data/listOfCctv";
+import axios from "axios";
 
 const DisplayCctv = () => {
     const { slug } = useParams();
     const cctvDetail = listOfCctv.find(cctv => cctv.slug === slug);
     const imgSlug="c17-futsat-court-right-keyframe-1"
+    const [cctv, setCctv] = useState([]);
+
+    useEffect(() => {
+        axios.get('/api/cctv')
+        .then((response) => setCctv(response.data))
+        .catch((error) => console.log(error))
+    },[cctv]);
+
     return (
         <Container className="my-5">
             <Row>

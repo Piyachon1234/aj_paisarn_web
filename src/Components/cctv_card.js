@@ -4,6 +4,7 @@ import ReactPlayer from 'react-player';
 import { Link } from "react-router-dom";
 
 const CctvCard = ({name, cctv_url, location, slug}) => {
+
     return (
         <Card className='my-3'>
             <Card.Body>
