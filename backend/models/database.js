@@ -35,7 +35,11 @@ const videoSchema = new mongoose.Schema({
   metadata: Object,
   stream: Buffer, // Store the video stream as binary data
 });
-
+const cctvSchema = new mongoose.Schema({
+  name: String,
+  objects_found: String,
+  location: String,
+});
 // Create models based on the schemas
 const User = mongoose.model('User', userSchema);
 const Image = mongoose.model('Image', imageSchema);
@@ -136,7 +140,15 @@ app.post('/videos', (req, res) => {
     }
   });
 });
-
+// Routes
+app.get('/api/cctv', async (req, res) => {
+  try {
+    const cctvData = await CCTV.find();
+    res.json(cctvData);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
