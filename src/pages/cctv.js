@@ -32,8 +32,8 @@ const DisplayCctv = () => {
                             />
                 </Col>
                 <Col md={4}>
-                    <h3 className="col-topic mb-4">วัตถุที่พบ</h3>
-                    <div style={{ maxHeight: "450px", overflowY: "auto" }}>
+                    <h3 className="col-topic mb-4">อาวุธที่พบ</h3>
+                    <div style={{ maxHeight: "450px", overflowY: "auto", overflowX: "hidden" }}>
                         <Row>
                             <p class="text"><Link to={`/keyframe/${imgSlug}`} style={{ color: 'black',textDecoration: 'none' }}>ปืน 0.99</Link></p>
                         </Row>

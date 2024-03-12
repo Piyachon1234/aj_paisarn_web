@@ -72,3 +72,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ref:
 https://www.w3.org/2020/06/machine-learning-workshop/talks/onnx_js_a_javascript_library_to_run_onnx_models_in_browsers_and_node_js.html
+
+add sort table
+https://blog.logrocket.com/creating-react-sortable-table/
