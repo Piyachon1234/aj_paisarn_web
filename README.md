@@ -75,3 +75,6 @@ https://www.w3.org/2020/06/machine-learning-workshop/talks/onnx_js_a_javascript_
 
 add sort table
 https://blog.logrocket.com/creating-react-sortable-table/
+
+how to .pt to onnx + use:
+https://github.com/Hyuto/yolov7-node
