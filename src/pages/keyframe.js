@@ -1,21 +1,49 @@
-import React from "react";
-import { Container, Button } from 'react-bootstrap';
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import ReactPlayer from 'react-player';
+import { Container, Row, Col, Button } from "react-bootstrap"; // Import Button component from react-bootstrap
+import { listOfCctv } from "../data/listOfCctv";
+import axios from "axios";
 
-const Keyframe = () => {
-  const { slug } = useParams();
-  let navigate = useNavigate();
-  return (
-    <Container>
-      <Button onClick={() => navigate(-1)} className="my-3">กลับ</Button>
-      <h1 className="topic" >{slug}</h1>
-      <img 
-      src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"
-      alt="new"
-      />
-      <h3 className="col-topic my-3">วัตถุที่พบ</h3>
-    </Container>
-  );
-} 
+const DisplayCctv = () => {
+    const { slug } = useParams();
+    const cctvDetail = listOfCctv.find(cctv => cctv.slug === slug);
+    const imgSlug = "c17-futsat-court-right-keyframe-1";
+    const [cctv, setCctv] = useState([]);
+    const [selectedImage, setSelectedImage] = useState(imgSlug); // State to track the selected image
+
+    useEffect(() => {
+        axios.get('/api/cctv')
+            .then((response) => setCctv(response.data))
+            .catch((error) => console.log(error))
+    }, [cctv]);
+
+    const handleImageChange = (newImgSlug) => {
+        setSelectedImage(newImgSlug);
+    };
+
+    return (
+        <Container className="my-5">
+            <Row>
+                <Col md={8}>
+                    <h2 className="col-topic">{cctvDetail.name} {cctvDetail.location}</h2>
+                    {/* Display the selected image */}
+                    <img src={`/images/${selectedImage}.jpg`} alt="Selected Image" style={{ width: '100%', height: 'auto' }} />
+                </Col>
+                <Col md={4}>
+                    <h3 className="col-topic mb-4">Choose Image</h3>
+                    <div>
+                        {/* Map through the list of images and create a button for each */}
+                        {listOfCctv.map((item, index) => (
+                            <Button key={index} variant="outline-primary" className="mb-2" onClick={() => handleImageChange(item.slug)}>
+                                {item.name}
+                            </Button>
+                        ))}
+                    </div>
+                </Col>
+            </Row>
+        </Container>
+    )
+}
 
 export default Keyframe;

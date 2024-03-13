@@ -44,7 +44,7 @@ const cctvSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 const Image = mongoose.model('Image', imageSchema);
 const Video = mongoose.model('Video', videoSchema);
-
+const cctv = mongoose.model('cctv', cctvSchema);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
