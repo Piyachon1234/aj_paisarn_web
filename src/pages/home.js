@@ -4,6 +4,7 @@ import Clock from 'react-live-clock';
 import CctvCard from '../Components/cctv_card'; 
 import { listOfCctv } from "../data/listOfCctv.js";
 import axios from "axios";
+import { BiSortUp } from 'react-icons/bi';
 
 const Home = () => {
     const [cctv, setCctv] = useState([]);
@@ -26,7 +27,9 @@ const Home = () => {
                 <Clock className="topic" format={'dddd, MMMM Do, YYYY, HH:mm:ss'} timezone={'Asia/Bangkok'} ticking={true}/>
                 <Row>
                     <Col className='col-topic'>CCTV</Col>
-                    <Col className='col-topic'>อาวุธที่พบ</Col>
+                    <Col className='col-topic' style={{ justifyContent: 'space-between'}}>
+                        <span>อาวุธที่พบ<BiSortUp /></span>
+                    </Col>
                     <Col className='col-topic'>ตำแหน่ง</Col>
                 </Row>
                 {listOfCctv.map((cctv) => {
