@@ -1,119 +1,54 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import ReactPlayer from 'react-player';
-import { Container, Row, Col } from "react-bootstrap";
-import { listOfCctv } from "../data/listOfCctv";
+import { Container, Row, Col, Image } from "react-bootstrap";
 import axios from "axios";
 
 const DisplayCctv = () => {
     const { slug } = useParams();
-    const cctvDetail = listOfCctv.find(cctv => cctv.slug === slug);
-    const imgSlug="c17-futsat-court-right-keyframe-1"
-    const [cctv, setCctv] = useState([]);
+    const [cctvDetail, setCctvDetail] = useState({});
+    const [keyframes, setKeyframes] = useState([]);
 
     useEffect(() => {
-        axios.get('/api/cctv')
-        .then((response) => setCctv(response.data))
-        .catch((error) => console.log(error))
-    },[cctv]);
+        // Fetch CCTV detail
+        axios.get(`/api/cctv/${slug}`)
+            .then((response) => {
+                setCctvDetail(response.data);
+                // Fetch keyframes related to the CCTV
+                axios.get(`/api/cctv/${slug}/keyframes`)
+                    .then((keyframesResponse) => setKeyframes(keyframesResponse.data))
+                    .catch((error) => console.log(error));
+            })
+            .catch((error) => console.log(error));
+    }, [slug]);
 
     return (
         <Container className="my-5">
             <Row>
                 <Col md={8}>
                     <h2 className="col-topic">{cctvDetail.name} {cctvDetail.location}</h2>
-                    <ReactPlayer url={cctvDetail.cctv_url}
-                                width='100%'
-                                height='100%'
-                                controls={true}
-                                playing={true}
-                                muted={true}
-                                loop={true}
-                            />
+                    {/* Display the CCTV feed */}
+                    <video controls width="100%" height="auto">
+                        <source src={cctvDetail.cctv_url} type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
                 </Col>
                 <Col md={4}>
-                    <h3 className="col-topic mb-4">อาวุธที่พบ</h3>
+                    <h3 className="col-topic mb-4">Keyframes</h3>
                     <div style={{ maxHeight: "450px", overflowY: "auto", overflowX: "hidden" }}>
-                        <Row>
-                            <p class="text"><Link to={`/keyframe/${imgSlug}`} style={{ color: 'black',textDecoration: 'none' }}>ปืน 0.99</Link></p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-                        <Row>
-                            <p>,,</p>
-                        </Row>
-
+                        {/* Display keyframes */}
+                        {keyframes.map((keyframe, index) => (
+                            <Row key={index} className="mb-3">
+                                <Link to={`/keyframe/${keyframe.slug}`} style={{ color: 'black', textDecoration: 'none' }}>
+                                    <Image src={keyframe.url} alt={`Keyframe ${index}`} fluid />
+                                    <p className="text">{keyframe.description}</p>
+                                </Link>
+                            </Row>
+                        ))}
                     </div>
-
                 </Col>
             </Row>
         </Container>
-    )
-
-}
+    );
+};
 
 export default DisplayCctv;
