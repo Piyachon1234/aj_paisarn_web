@@ -78,3 +78,7 @@ https://blog.logrocket.com/creating-react-sortable-table/
 
 how to .pt to onnx + use:
 https://github.com/Hyuto/yolov7-node
+
+run docker
+`docker compose build`
+`docker compose up -d`
