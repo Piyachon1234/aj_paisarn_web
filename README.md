@@ -11,6 +11,14 @@
 - anaconda environment
 - npm >=v18
 
+## วิธีรัน model
+1. install environment ของanaconda
+2. cd yolov7_train
+3. pip install -r requirements. txt
+4. รัน detect.py
+
+
+
 ## วิธีรันบนDocker
 1. `docker compose build` (หากมีการแก้ไขโค้ด)
 2. `docker compose up -d`
