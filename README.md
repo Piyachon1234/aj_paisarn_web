@@ -9,7 +9,7 @@
 - VS code(for working on code) or other IDE
 - Docker for running webapp
   
-## Requirement library 
+## Requirement library ลในterminal
 - Python
 - npm >=v18
 
@@ -26,8 +26,8 @@ Link onedrive:
    4.1 python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source yourvideo.mp4 สำหรับรันdetect objectอื่นๆ
    4.2 python detect.py --weights best.pt --conf 0.25 --img-size 640 --source yourvideo.mp4 detect ปืนโดยเฉพาะ
 
-## วิธีรันบนDocker
-1. `docker compose build` (หากมีการแก้ไขโค้ด)
+## วิธีรันwebappบนDocker
+1. `docker compose build`
 2. `docker compose up -d`
 
 ## วิธีรันReactผ่านVS code
