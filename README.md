@@ -9,7 +9,7 @@
 - VS code(for working on code) or other IDE
 - Docker for running webapp
   
-## Requirement library ลในterminal
+## Requirement library ลงในterminal
 - Python
 - npm >=v18
 
@@ -34,6 +34,8 @@ Link onedrive: https://studentmahidolac-my.sharepoint.com/:f:/g/personal/daran_t
 ## วิธีรันReactผ่านVS code
 1. `npm start`
 
+
+# React Readme
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
