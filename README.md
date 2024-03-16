@@ -1,33 +1,36 @@
-## โครงสร้างระบบ
+## ระบบเฟรมเวิร์คและsoftwareที่ใช้(เบื้องต้น)
 - frontend: React.js
 - backend: Node.js
-- Database: MongoDb
-- model
+- Database: MongoDb *ต้องสร้างใหม่
+- model: yolov7
+- Docker
 
 ## Required Software
 - VS code(for working on code) or other IDE
-- Docker for running localhost
-## Requirement
-- anaconda environment
+- Docker for running webapp
+  
+## Requirement library 
+- Python
 - npm >=v18
 
 ## วิธีรัน model
-1. install environment ของanaconda
-2. cd yolov7_train
+Link onedrive:
+1. install python
+   1.1 สำหรับwindow
+   https://phoenixnap.com/kb/how-to-install-python-3-windows#ftoc-heading-4
+   - ต้องลงpy -m venv venv ก่อนเพื่อสร้างvirtual environment
+2. cd โฟลเดอร์
+   2.1 /venv/Scripts/activate 
 3. pip install -r requirements. txt
-4. รัน detect.py
-
-  4.1 python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source yourvideo.mp4 สำหรับรันdetect objectอื่นๆ
-  4.2 python detect.py --weights best.pt --conf 0.25 --img-size 640 --source yourvideo.mp4 detect ปืนโดยเฉพาะ
-
-
-
+4. รัน detect ดูวิธีรันในreadme.txt
+   4.1 python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source yourvideo.mp4 สำหรับรันdetect objectอื่นๆ
+   4.2 python detect.py --weights best.pt --conf 0.25 --img-size 640 --source yourvideo.mp4 detect ปืนโดยเฉพาะ
 
 ## วิธีรันบนDocker
 1. `docker compose build` (หากมีการแก้ไขโค้ด)
 2. `docker compose up -d`
 
-## วิธีรันผ่านVS code
+## วิธีรันReactผ่านVS code
 1. `npm start`
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
