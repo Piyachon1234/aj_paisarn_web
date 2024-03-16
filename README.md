@@ -16,6 +16,9 @@
 2. cd yolov7_train
 3. pip install -r requirements. txt
 4. รัน detect.py
+4.1 python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source yourvideo.mp4 สำหรับรันdetect objectอื่นๆ
+4.2 python detect.py --weights best.pt --conf 0.25 --img-size 640 --source yourvideo.mp4 detect ปืนโดยเฉพาะ
+
 
 
 
