@@ -14,7 +14,8 @@
 - npm >=v18
 
 ## วิธีรัน model
-Link onedrive:
+Link onedrive: https://studentmahidolac-my.sharepoint.com/:f:/g/personal/daran_thw_student_mahidol_ac_th/EgdPhCtaSJJHpGLLYWafFPwB096bTL17e5rZvB2UW2vJXQ?e=cbniIc
+
 1. install python
    1.1 สำหรับwindow
    https://phoenixnap.com/kb/how-to-install-python-3-windows#ftoc-heading-4
