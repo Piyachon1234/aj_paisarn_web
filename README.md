@@ -17,17 +17,28 @@
 Link onedrive: [https://studentmahidolac-my.sharepoint.com/:f:/g/personal/daran_thw_student_mahidol_ac_th/EgdPhCtaSJJHpGLLYWafFPwB096bTL17e5rZvB2UW2vJXQ?e=cbniIc](https://studentmahidolac-my.sharepoint.com/:f:/g/personal/daran_thw_student_mahidol_ac_th/EgdPhCtaSJJHpGLLYWafFPwBhHCcD9os7bOX7P82c5e0Hw?e=NbZi4a)
 
 1. install python
+   
    1.1 สำหรับwindow
    https://phoenixnap.com/kb/how-to-install-python-3-windows#ftoc-heading-4
    - ต้องลงpy -m venv venv ก่อนเพื่อสร้างvirtual environment
-2. cd โฟลเดอร์
+3. cd โฟลเดอร์
+   
    2.1 /venv/Scripts/activate 
-3. pip install -r requirements. txt
-4. รัน detect ดูวิธีรันในreadme.txt
+5. pip install -r requirements. txt
+6. รัน detect ดูวิธีรันในreadme.txt
+
    4.1 python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source yourvideo.mp4 สำหรับรันdetect objectอื่นๆ
+   
    4.2 python detect.py --weights best.pt --conf 0.25 --img-size 640 --source yourvideo.mp4 detect ปืนโดยเฉพาะ
+   
    4.3 เวลา train ใช้คำสั่ง python train.py --workers 8 --device 0 --batch-size 32 --data data/coco.yaml --img 640 640 --cfg cfg/training/yolov7.yaml --weights '' --name yolov7 --hyp data/hyp.scratch.p5.yaml
  ซึ่งเราต้องเปลี่ยน data/coco.yaml ให้เป็นไฟล์ yaml ของตัวdatasetที่เราอยากใช้train ถ้าgpu memory runout ให้เปลี่ยน batch-size เหลือ 16หรือน้อยกว่า
+
+## วิธีtrain model(ref: https://github.com/WongKinYiu/yolov7)
+เวลา train ใช้คำสั่ง python train.py --workers 8 --device 0 --batch-size 32 --data data/coco.yaml --img 640 640 --cfg cfg/training/yolov7.yaml --weights '' --name yolov7 --hyp data/hyp.scratch.p5.yaml
+
+ซึ่งเราต้องเปลี่ยน data/coco.yaml ให้เป็นไฟล์ yaml ของตัวdatasetที่เราอยากใช้train ถ้าgpu memory runout ให้เปลี่ยน batch-size เหลือ 16หรือน้อยกว่า
+
 ## วิธีรันwebappบนDocker
 1. `docker compose build`
 2. `docker compose up -d`
