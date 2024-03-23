@@ -37,6 +37,11 @@ Link onedrive: [https://studentmahidolac-my.sharepoint.com/:f:/g/personal/daran_
 ## วิธีtrain model(ref: https://github.com/WongKinYiu/yolov7)
 เวลา train ใช้คำสั่ง python train.py --workers 8 --device 0 --batch-size 32 --data data/coco.yaml --img 640 640 --cfg cfg/training/yolov7.yaml --weights '' --name yolov7 --hyp data/hyp.scratch.p5.yaml
 
+จากนั้นเข้าtrain เพื่ออ่านกราฟ precision อย่างเช่นในรูปความแม่นยำคือ0.7+percent
+
+![Screenshot 2567-03-23 at 17 08 58](https://github.com/Piyachon1234/aj_paisarn_web/assets/78150887/d4cff078-5e89-47ce-ad77-5935dd1848d8)
+
+
 ซึ่งเราต้องเปลี่ยน data/coco.yaml ให้เป็นไฟล์ yaml ของตัวdatasetที่เราอยากใช้train ถ้าgpu memory runout ให้เปลี่ยน batch-size เหลือ 16หรือน้อยกว่า
 
 ## วิธีรันwebappบนDocker
