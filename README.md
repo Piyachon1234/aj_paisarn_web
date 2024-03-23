@@ -20,25 +20,32 @@ Link onedrive: [https://studentmahidolac-my.sharepoint.com/:f:/g/personal/daran_
    
    1.1 สำหรับwindow
    https://phoenixnap.com/kb/how-to-install-python-3-windows#ftoc-heading-4
-   - ต้องลงpy -m venv venv ก่อนเพื่อสร้างvirtual environment
+   - ต้องลง`py -m venv venv` ก่อนเพื่อสร้างvirtual environment
 3. cd โฟลเดอร์
    
    2.1 /venv/Scripts/activate 
-5. pip install -r requirements. txt
+5. ``pip install -r requirements. txt`` เพื่อinstall librariesที่จำเป็น
 6. รัน detect ดูวิธีรันในreadme.txt
 
-   4.1 python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source yourvideo.mp4 สำหรับรันdetect objectอื่นๆ
+   4.1 `python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source yourvideo.mp4` สำหรับรันdetect objectอื่นๆ
    
-   4.2 python detect.py --weights best.pt --conf 0.25 --img-size 640 --source yourvideo.mp4 detect ปืนโดยเฉพาะ
-   
-   4.3 เวลา train ใช้คำสั่ง python train.py --workers 8 --device 0 --batch-size 32 --data data/coco.yaml --img 640 640 --cfg cfg/training/yolov7.yaml --weights '' --name yolov7 --hyp data/hyp.scratch.p5.yaml
-   
- ซึ่งเราต้องเปลี่ยน data/coco.yaml ให้เป็นไฟล์ yaml ของตัวdatasetที่เราอยากใช้train ถ้าgpu memory runout ให้เปลี่ยน batch-size เหลือ 16หรือน้อยกว่า
+   4.2 `python detect.py --weights best.pt --conf 0.25 --img-size 640 --source yourvideo.mp4` detect ปืนโดยเฉพาะ
 
-## วิธีtrain model(ref: https://github.com/WongKinYiu/yolov7)
-เวลา train ใช้คำสั่ง python train.py --workers 8 --device 0 --batch-size 32 --data data/coco.yaml --img 640 640 --cfg cfg/training/yolov7.yaml --weights '' --name yolov7 --hyp data/hyp.scratch.p5.yaml
-
+## วิธีtrain model และอ่านค่าความแม่นยำ(ref: https://github.com/WongKinYiu/yolov7)
 จากนั้นเข้าtrain เพื่ออ่านกราฟ precision อย่างเช่นในรูปความแม่นยำคือ0.7+percent
+เข้า https://wandb.ai/site เป็นเว็บไซต์สำหรับเก็บข้อมูลการเทรนโมเดล
+
+จากนั้นให้เข้าterminalแล้ว cd yolov7train
+
+จากนั้นรันเพื่อtrain ใช้คำสั่ง ```python train.py --workers 8 --device 0 --batch-size 32 --data data/coco.yaml --img 640 640 --cfg cfg/training/yolov7.yaml --weights '' --name yolov7 --hyp data/hyp.scratch.p5.yaml```
+
+ซึ่งเราต้องเปลี่ยน data/coco.yaml ให้เป็นไฟล์ yaml ของตัวdatasetที่เราอยากใช้train ถ้าgpu memory runout ให้เปลี่ยน batch-size เหลือ 16หรือน้อยกว่า
+
+จากนั้นมันจะเซฟเข้าระบบโดยอัตโนมัติ จากนั้นเราก็เช็คช่องresult
+
+![Screenshot 2567-03-23 at 19 20 39](https://github.com/Piyachon1234/aj_paisarn_web/assets/78150887/be49cada-f8f5-49ad-8309-185b3dea6445)
+
+จากรูปResult เราสามารถอ่านค่าความแม่นยำของโมเดลได้ในกราฟprecision โดยอ่านค่าในจุดสุดท้ายตามในรูป
 
 ![Screenshot 2567-03-23 at 17 08 58](https://github.com/Piyachon1234/aj_paisarn_web/assets/78150887/d4cff078-5e89-47ce-ad77-5935dd1848d8)
 
