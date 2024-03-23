@@ -51,6 +51,7 @@ Link onedrive: [https://studentmahidolac-my.sharepoint.com/:f:/g/personal/daran_
 
 ตัวอย่างresult: https://wandb.ai/piyachon-rusu/YOLOR/reports/Untitled-Report--Vmlldzo3MjY3ODUz?accessToken=2mexnlgx7yeq5c9otl68ft98uvtq9aokkgm7g4iprjf66859unzq1it6pz8n07vs
 
+ซึ่ง resultในการtrainจะถูกเก็บไว้อัตโนมัติโดยไม่ต้องทำอะไรเพิ่มเติม ในlocal จะมีไฟล์resultบางส่วนมาให้ แต่ถ้าต้องการดูresultsแบบเต็มรูปแบบ ให้เช็คในเว็ปเท่านั้น
 ## วิธีรันwebappบนDocker
 1. `docker compose build`
 2. `docker compose up -d`
